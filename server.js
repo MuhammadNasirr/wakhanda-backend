@@ -34,9 +34,7 @@ app.post('/api/doPayment/', (req, res) => {
   const amount = req.body.amount
   const currency = req.body.currency
   stripe.charges.create({
-    email: email,
     amount: amount,
-    currency: currency,
     source: token,
   }, function (err, customer) {
     console.log('customer error', err)
