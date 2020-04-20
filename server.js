@@ -30,12 +30,14 @@ setInterval(function () {
 
 app.post('/api/doPayment/', (req, res) => {
   const token = req.body.tokenId
-  const email = req.body.email
+  const description = req.body.description
   const amount = req.body.amount
   const currency = req.body.currency
   stripe.charges.create({
     amount: amount,
+    currency: currency,
     source: token,
+    description: description,
   }, function (err, customer) {
     console.log('customer error', err)
     if (err) {
