@@ -1,31 +1,28 @@
 {
-  "name": "hello-world",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "compression": "^1.7.3",
-    "cors": "^2.8.4",
-    "dotenv": "^6.2.0",
-    "express": "^4.16.3",
-    "express-favicon": "^2.0.1",
-    "firebase-admin": "^7.3.0",
-    "newrelic": "^5.10.0",
-    "node-cron": "^2.0.3",
-    "path": "^0.12.7",
-    "prerender-node": "^3.2.1",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-scripts": "1.1.4",
-    "rootpath": "^0.1.2",
-    "stripe": "^7.1.0"
-  },
-  "scripts": {
-    "start": "NODE_ENV=production node server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "echo Skip build on Heroku"
-  },
-  "heroku-run-build-script": true
+    "name": "node-mongo-registration-login-api",
+    "version": "1.0.0",
+    "description": "NodeJS + MongoDB API for User Management, Authentication and Registration",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cornflourblue/node-mongo-registration-login-api.git"
+    },
+    "scripts": {
+        "start": "node ./server.js",
+        "start:dev": "nodemon ./server.js"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-jwt": "^6.0.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongodb": "^3.5.9",
+        "mongoose": "^5.9.21",
+        "rootpath": "^0.1.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    }
 }

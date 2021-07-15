@@ -1,0 +1,4 @@
+﻿{
+    "connectionString": "mongodb+srv://admin:admin@cluster0.4gu2k.mongodb.net/wakandha?retryWrites=true&w=majority",
+    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+}
