@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
 const commentSchema = new mongoose.Schema({
     content: {
         type: String,
-        required: true
     },
     tag: Object,
+    media: Array,
     reply: mongoose.Types.ObjectId,
     likes: [{type: mongoose.Types.ObjectId, ref: 'user'}],
     user: {type: mongoose.Types.ObjectId, ref: 'user'},
