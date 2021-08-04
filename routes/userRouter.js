@@ -16,6 +16,8 @@ router.get('/suggestionsUser', auth, userCtrl.suggestionsUser)
 router.get('/users', auth, userCtrl.getAllUsers)
 router.patch('/users/:id/createrequest', auth, userCtrl.createFriendRequest)
 router.patch('/users/:id/approverequest', auth, userCtrl.approveFriendRequest)
+router.patch('/users/:id/removerequest', auth, userCtrl.removeFriendRequest)
+router.patch('/users/:id/rejectrequest', auth, userCtrl.rejectFriendRequest)
 
 
 
