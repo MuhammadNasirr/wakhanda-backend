@@ -15,7 +15,7 @@ const userCtrl = {
         try {
             console.log('req.params.id', req.params.id)
             const user = await Users.findById(req.params.id).select('-password')
-                .populate("followers following request", "-password")
+                .populate("followers following request friends", "-password")
             if (!user) return res.status(400).json({ msg: "User does not exist." })
 
             res.json({ user })
@@ -121,6 +121,22 @@ const userCtrl = {
             }, { new: true })
 
             res.json({ msg: "Your request sent to this user." })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    approveFriendRequest: async (req, res) => {
+        try {
+            await Users.findOneAndUpdate({ _id: req.params.id }, {
+                $pull: { sentRequest: req.user._id }
+            }, { new: true })
+            await Users.findOneAndUpdate({ _id: req.user._id }, {
+                $pull: { request: req.params.id },
+                $push: { friends: req.params.id }
+            })
+
+            res.json({ msg: "You are now friends!" })
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })
