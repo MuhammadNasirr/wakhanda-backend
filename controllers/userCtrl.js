@@ -126,6 +126,40 @@ const userCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    removeFriendRequest: async (req, res) => {
+        try {
+
+            await Users.findOneAndUpdate({ _id: req.params.id }, {
+                $pull: { request: req.user._id }
+            }, { new: true })
+
+            await Users.findOneAndUpdate({ _id: req.user._id }, {
+                $pull: { sentRequest: req.params.id }
+            }, { new: true })
+
+            res.json({ msg: "Your request has been removed." })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    rejectFriendRequest: async (req, res) => {
+        try {
+
+            await Users.findOneAndUpdate({ _id: req.params.id }, {
+                $pull: { sentRequest: req.user._id }
+            }, { new: true })
+
+            await Users.findOneAndUpdate({ _id: req.user._id }, {
+                $pull: { request: req.params.id }
+            }, { new: true })
+
+            res.json({ msg: "Your request has been rejected." })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
     approveFriendRequest: async (req, res) => {
         try {
             await Users.findOneAndUpdate({ _id: req.params.id }, {
