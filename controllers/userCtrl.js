@@ -15,7 +15,7 @@ const userCtrl = {
         try {
             console.log('req.params.id', req.params.id)
             const user = await Users.findById(req.params.id).select('-password')
-                .populate("followers following", "-password")
+                .populate("followers following request", "-password")
             if (!user) return res.status(400).json({ msg: "User does not exist." })
 
             res.json({ user })
