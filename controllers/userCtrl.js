@@ -24,6 +24,18 @@ const userCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    getAllUsers: async (req, res) => {
+        try {
+            console.log('req.params.id', req.params.id)
+            const users = await Users.find({})
+            if (!users) return res.status(400).json({ msg: "User does not exist." })
+
+            res.json({ users })
+        } catch (err) {
+            console.log('err', err)
+            return res.status(500).json({ msg: err.message })
+        }
+    },
     updateUser: async (req, res) => {
         try {
             const { avatar, bae, mybest, fullname, mobile, address, story, website, gender } = req.body
