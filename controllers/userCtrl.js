@@ -109,6 +109,23 @@ const userCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    createFriendRequest: async (req, res) => {
+        try {
+
+            await Users.findOneAndUpdate({ _id: req.params.id }, {
+                $push: { request: req.user._id }
+            }, { new: true })
+
+            await Users.findOneAndUpdate({ _id: req.user._id }, {
+                $push: { sentRequest: req.params.id }
+            }, { new: true })
+
+            res.json({ msg: "Your request sent to this user." })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
 }
 
 

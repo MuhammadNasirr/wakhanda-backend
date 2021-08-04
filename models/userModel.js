@@ -25,31 +25,37 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    avatar:{
+    avatar: {
         type: String,
         default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png'
     },
-    bae:{
+    bae: {
         type: String,
         default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png'
     },
-    mybest:{
+    mybest: {
         type: String,
         default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png'
     },
-    role: {type: String, default: 'user'},
-    gender: {type: String, default: 'male'},
-    mobile: {type: String, default: ''},
-    address: {type: String, default: ''},
+    role: { type: String, default: 'user' },
+    gender: { type: String, default: 'male' },
+    mobile: { type: String, default: '' },
+    address: { type: String, default: '' },
     story: {
-        type: String, 
+        type: String,
         default: '',
         maxlength: 200
     },
-    website: {type: String, default: ''},
-    followers: [{type: mongoose.Types.ObjectId, ref: 'user'}],
-    following: [{type: mongoose.Types.ObjectId, ref: 'user'}],
-    saved: [{type: mongoose.Types.ObjectId, ref: 'user'}]
+    website: { type: String, default: '' },
+    followers: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
+    following: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
+    friends: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'user'
+    }],
+    sentRequest: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+    request: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+    saved: [{ type: mongoose.Types.ObjectId, ref: 'user' }]
 }, {
     timestamps: true
 })
