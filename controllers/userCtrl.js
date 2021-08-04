@@ -129,7 +129,8 @@ const userCtrl = {
     approveFriendRequest: async (req, res) => {
         try {
             await Users.findOneAndUpdate({ _id: req.params.id }, {
-                $pull: { sentRequest: req.user._id }
+                $pull: { sentRequest: req.user._id },
+                $push: { friends: req.user._id }
             }, { new: true })
             await Users.findOneAndUpdate({ _id: req.user._id }, {
                 $pull: { request: req.params.id },
