@@ -147,7 +147,7 @@ const postCtrl = {
                 .populate({
                     path: "comments",
                     populate: {
-                        path: "user likes",
+                        path: "user likes reply",
                         select: "-password"
                     }
                 })
