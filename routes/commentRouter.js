@@ -4,6 +4,8 @@ const auth = require('../middleware/auth')
 
 router.post('/comment', auth, commentCtrl.createComment)
 
+router.post('/comment/reply', auth, commentCtrl.createReply)
+
 router.patch('/comment/:id', auth, commentCtrl.updateComment)
 
 router.patch('/comment/:id/like', auth, commentCtrl.likeComment)

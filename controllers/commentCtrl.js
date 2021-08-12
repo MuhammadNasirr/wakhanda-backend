@@ -1,4 +1,5 @@
 const Comments = require('../models/commentModel')
+const Replies = require('../models/replyModel')
 const Posts = require('../models/postModel')
 
 
@@ -88,6 +89,31 @@ const commentCtrl = {
             })
 
             res.json({ msg: 'Deleted Comment!' })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    createReply: async (req, res) => {
+        try {
+            const { postId, content, media, tag, commentId, postUserId } = req.body
+
+            const post = await Posts.findById(postId)
+            if (!post) return res.status(400).json({ msg: "This post does not exist." })
+            const comment = await Comments.findById(commentId)
+            if (!comment) return res.status(400).json({ msg: "This comment does not exist." })
+
+            const newReply = new Replies({
+                user: req.user._id, content, media, tag, commentId, postUserId, postId
+            })
+
+            await Comments.findOneAndUpdate({ _id: postId }, {
+                $push: { reply: newReply._id }
+            }, { new: true })
+
+            await newReply.save()
+
+            res.json({ newReply })
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })
