@@ -119,6 +119,34 @@ const commentCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    likeReply: async (req, res) => {
+        try {
+            const comment = await Replies.find({ _id: req.params.id, likes: req.user._id })
+            if (comment.length > 0) return res.status(400).json({ msg: "You liked this post." })
+
+            await Replies.findOneAndUpdate({ _id: req.params.id }, {
+                $push: { likes: req.user._id }
+            }, { new: true })
+
+            res.json({ msg: 'Liked Reply!' })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    unLikeReply: async (req, res) => {
+        try {
+
+            await Replies.findOneAndUpdate({ _id: req.params.id }, {
+                $pull: { likes: req.user._id }
+            }, { new: true })
+
+            res.json({ msg: 'UnLiked Reply!' })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
 }
 
 

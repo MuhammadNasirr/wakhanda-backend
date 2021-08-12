@@ -6,6 +6,10 @@ router.post('/comment', auth, commentCtrl.createComment)
 
 router.post('/comment/reply', auth, commentCtrl.createReply)
 
+router.post('/comment/reply/:id/like', auth, commentCtrl.likeReply)
+
+router.post('/comment/reply/:id/unlike', auth, commentCtrl.unLikeReply)
+
 router.patch('/comment/:id', auth, commentCtrl.updateComment)
 
 router.patch('/comment/:id/like', auth, commentCtrl.likeComment)
