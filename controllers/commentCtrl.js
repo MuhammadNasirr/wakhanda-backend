@@ -107,7 +107,7 @@ const commentCtrl = {
                 user: req.user._id, content, media, tag, commentId, postUserId, postId
             })
 
-            await Comments.findOneAndUpdate({ _id: postId }, {
+            await Comments.findOneAndUpdate({ _id: commentId }, {
                 $push: { reply: newReply._id }
             }, { new: true })
 
