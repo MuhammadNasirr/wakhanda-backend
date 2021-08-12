@@ -146,17 +146,16 @@ const postCtrl = {
                 .populate("user likes", "avatar username fullname followers")
                 .populate({
                     path: "comments",
-                    populate: {
+                    populate: [{
                         path: "user likes",
                         select: "-password"
-                    },
-                    populate: {
+                    }, {
                         path: "reply",
                         populate: {
                             path: "user likes",
                             select: "-password"
                         },
-                    }
+                    }],
                 })
 
             if (!post) return res.status(400).json({ msg: 'This post does not exist.' })
